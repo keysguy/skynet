@@ -2,7 +2,7 @@ package.cpath = "luaclib/?.so"
 package.path = "lualib/?.lua;examples/?.lua"
 
 if _VERSION ~= "Lua 5.4" then
-	error "Use lua 5.4"
+	print("Cur lua version is " .. _VERSION .. ", Player use lua 5.4")
 end
 
 local socket = require "client.socket"
