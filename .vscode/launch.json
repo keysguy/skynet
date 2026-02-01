@@ -30,6 +30,30 @@
             //     "trace": false, // 启用跟踪
             //     "traceResponse": false // 跟踪响应
             // },
+        },
+        {
+            "type": "LuaHelper-Debug",
+            "request": "launch",
+            "name": "LuaHelper-Attach",
+            "description": "通用模式,通常调试项目请选择此模式",
+            "cwd": "${workspaceFolder}",
+            "luaFileExtension": "",
+            "connectionPort": 55818,
+            "stopOnEntry": true,
+            "useCHook": true,
+            "autoPathMode": true
+        },
+    ],
+    // 组合调试配置：同时调试C和Lua
+    "compounds": [
+        {
+            "name": "Skynet Full Debug",
+            "configurations": [
+                "SkynetDebug",
+                "LuaHelper-Attach"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "SkynetBuild"
         }
     ],
     "version": "2.0.0"

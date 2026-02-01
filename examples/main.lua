@@ -1,6 +1,9 @@
 local skynet = require "skynet"
 local sprotoloader = require "sprotoloader"
 
+--require("socket.core")
+--require("LuaPanda").start("127.0.0.1", 55818);
+
 local max_client = 64
 
 skynet.start(function()
