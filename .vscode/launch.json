@@ -35,7 +35,7 @@
             "type": "emmylua_new",
             "request": "launch",
             "name": "EmmyLua-Debug",
-            "host": "localhost",
+            "host": "127.0.0.1",
             "port": 39966,
             "ext": [
                 ".lua",
