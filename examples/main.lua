@@ -1,8 +1,9 @@
 local skynet = require "skynet"
 local sprotoloader = require "sprotoloader"
 
---require("socket.core")
---require("LuaPanda").start("127.0.0.1", 55818);
+--package.cpath = package.cpath .. ";/home/wangyufei/.vscode-server/extensions/tangzx.emmylua-0.9.35-linux-x64/debugger/emmy/linux/emmy_core.so"
+local dbg = require("emmy_core")
+dbg.tcpListen("localhost", 39966)
 
 local max_client = 64
 

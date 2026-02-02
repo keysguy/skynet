@@ -32,6 +32,19 @@
             // },
         },
         {
+            "type": "emmylua_new",
+            "request": "launch",
+            "name": "EmmyLua-Debug",
+            "host": "localhost",
+            "port": 39966,
+            "ext": [
+                ".lua",
+                ".lua.txt",
+                ".lua.bytes"
+            ],
+            "ideConnectDebugger": true
+        },
+        {
             "type": "LuaHelper-Debug",
             "request": "launch",
             "name": "LuaHelper-Attach",
@@ -50,7 +63,7 @@
             "name": "Skynet Full Debug",
             "configurations": [
                 "SkynetDebug",
-                "LuaHelper-Attach"
+                "EmmyLua-Debug"
             ],
             "stopAll": true,
             "preLaunchTask": "SkynetBuild"
