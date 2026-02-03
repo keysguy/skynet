@@ -43,19 +43,7 @@
                 ".lua.bytes"
             ],
             "ideConnectDebugger": true
-        },
-        {
-            "type": "LuaHelper-Debug",
-            "request": "launch",
-            "name": "LuaHelper-Attach",
-            "description": "通用模式,通常调试项目请选择此模式",
-            "cwd": "${workspaceFolder}",
-            "luaFileExtension": "",
-            "connectionPort": 55818,
-            "stopOnEntry": true,
-            "useCHook": true,
-            "autoPathMode": true
-        },
+        }
     ],
     // 组合调试配置：同时调试C和Lua
     "compounds": [

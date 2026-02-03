@@ -1,8 +1,15 @@
 local skynet = require "skynet"
 local sprotoloader = require "sprotoloader"
 
-local max_client = 64
 
+local dbg = require("emmy_core")
+if dbg then
+	local ret = dbg.tcpListen("127.0.0.1", 39966)
+	print("Emmy Start Listen 39966: " .. tostring(ret))
+	dbg.waitIDE()
+end
+
+local max_client = 64
 skynet.start(function()
 	skynet.error("Server start")
 	skynet.uniqueservice("protoloader")
@@ -13,19 +20,10 @@ skynet.start(function()
 	skynet.newservice("simpledb")
 	local watchdog = skynet.newservice("watchdog")
 	local addr, port = skynet.call(watchdog, "lua", "start", {
-		port = 8888,
+		port = 38888,
 		maxclient = max_client,
 		nodelay = true,
     })
-	
-	--package.cpath = package.cpath .. ";/home/wangyufei/.vscode-server/extensions/tangzx.emmylua-0.9.35-linux-x64/debugger/emmy/linux/emmy_core.so"
-	local dbg = require("emmy_core")
-	if dbg then
-		local ret = dbg.tcpListen("127.0.0.1", 39966)
-        print("Emmy Start Listen 39966:" .. tostring(ret))
-		
-        dbg.waitIDE()
-	end
 
 	skynet.error("Watchdog listen on " .. addr .. ":" .. port)
 	skynet.exit()
