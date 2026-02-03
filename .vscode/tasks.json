@@ -18,6 +18,15 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             }
+        },
+        {
+            "label": "echo-workspace",
+            "type": "shell",
+            "command": "echo",
+            "args": [
+                "workspaceFolder is: ${workspaceFolder}"
+            ],
+            "problemMatcher": []
         }
     ]
 }

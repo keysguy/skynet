@@ -23,6 +23,9 @@
                     "ignoreFailures": true
                 }
             ],
+            "sourceFileMap": {
+                "/home/wangyufei/Work/Projects/skynet-master/3rd/lua": "${workspaceFolder}/3rd/lua"
+            },
             "preLaunchTask": "SkynetBuild",
             // 添加以下字段以提高调试体验
             // "logging": {
