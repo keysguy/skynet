@@ -13,6 +13,8 @@ end
 
 worker.init = function()
     skynet.error(worker.name .. " " .. worker.id .. " inited")
+    skynet.name("felix_worker", skynet.self())
+    --skynet.register("felix_worker")
     skynet.fork(worker.timer, worker)
 end
 

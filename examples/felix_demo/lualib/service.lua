@@ -26,6 +26,7 @@ local dispatch = function(session, address, cmd, ...)
     -- 从resp表中查找是否存在消息的响应函数
     local func = M.resp[cmd]
     if not func then
+        skynet.error(M.name .. " " .. M.id .. " dispatch error, unknown cmd: " .. tostring(cmd))
         skynet.ret()
         return
     end
@@ -34,6 +35,7 @@ local dispatch = function(session, address, cmd, ...)
     local isok = ret[1]
 
     if not isok then
+        skynet.error(M.name .. " " .. M.id .. " dispatch error, func call failed: " .. tostring(cmd))
         skynet.ret()
         return
     end
