@@ -1,4 +1,5 @@
 local skynet = require "skynet"
+local skynet_manager = require "skynet.manager"
 local worker = require "service"
 
 worker.money = 0
@@ -12,7 +13,8 @@ function worker:update(frame)
 end
 
 worker.init = function()
-    skynet.error(worker.name .. " " .. worker.id .. " inited")
+    local selfAddr = skynet.self()
+    skynet.error(worker.name .. " - " .. worker.id .. " - " .. selfAddr .. " inited")
     skynet.name("felix_worker", skynet.self())
     --skynet.register("felix_worker")
     skynet.fork(worker.timer, worker)
