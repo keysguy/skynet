@@ -7,7 +7,8 @@ buyer.cat_food_cnt = 0
 buyer.resp.buy = function(source)
     skynet.error(buyer.name .. " " .. tostring(buyer.id) .. " buy start")
 
-    local ok, result_or_err = pcall(skynet.call, "felix_worker", "lua", "change_money", -buyer.cat_food_price)
+    local ok, result_or_err = pcall(buyer.call, "node1", "felix_worker", "change_money", -buyer.cat_food_price)
+
     if not ok then
         -- skynet.call 调用本身失败（服务不存在、消息发送失败等）
         skynet.error(buyer.name .. " " .. tostring(buyer.id) .. " buy error: ", result_or_err)
@@ -23,7 +24,7 @@ buyer.resp.buy = function(source)
         end
         -- 购买失败，把钱加回去
         skynet.error("buy failed, money not enough")
-        skynet.call("felix_worker", "lua", "change_money", buyer.cat_food_price)
+        buyer.call("node1", "felix_worker", "change_money", buyer.cat_food_price)
         return false
     end
 end

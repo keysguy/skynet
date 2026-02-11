@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/skynet",
-            "args": ["${workspaceFolder}/examples/config"],
+            "args": ["${workspaceFolder}/examples/felix_demo/config.node1"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

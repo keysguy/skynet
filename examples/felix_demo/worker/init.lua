@@ -50,6 +50,7 @@ end
 
 worker.resp.change_money = function(source, delta)
     worker.money = worker.money + delta
+    skynet.error(worker.name .. " " .. worker.id .. " change money to: " .. tostring(worker.money))
     return worker.money
 end
 

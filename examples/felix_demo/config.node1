@@ -1,15 +1,14 @@
-include "config.path"
+include "config_felix.path"
 
 -- preload = "./examples/preload.lua"	-- run preload.lua before every lua service run
 thread = 8
 logger = nil
 logpath = "."
-harbor = 1
-address = "127.0.0.1:2526"
-master = "127.0.0.1:2013"
-start = "main"    -- main script
+harbor = 0
+start = "felix_main"
 bootstrap = "snlua bootstrap"	-- The service for bootstrap
-standalone = "0.0.0.0:2013"
 -- snax_interface_g = "snax_g"
 cpath = root.."cservice/?.so"
 -- daemon = "./skynet.pid"
+node = "node1"
+cluster = "./examples/felix_demo/cluster_config.lua"
