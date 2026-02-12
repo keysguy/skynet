@@ -1,6 +1,7 @@
 local skynet = require "skynet"
 local skynet_manager = require "skynet.manager"
 local worker = require "service"
+local cluster = require "skynet.cluster"
 
 worker.money = 0
 worker.isworking = false
@@ -8,15 +9,13 @@ worker.isworking = false
 function worker:update(frame)
     if self.isworking then
         self.money = self.money + 1
-        skynet.error(self.name .. tostring(self.id) .. ", money: " .. tostring(self.money))
+        skynet.error(self.name .. " - " .. tostring(self.id) .. ", money: " .. tostring(self.money))
     end
 end
 
 worker.init = function()
     local selfAddr = skynet.self()
-    skynet.error(worker.name .. " - " .. worker.id .. " - " .. selfAddr .. " inited")
-    skynet.name("felix_worker", skynet.self())
-    --skynet.register("felix_worker")
+    skynet.error(worker.name .. " - " .. worker.id .. ", addr:" .. tostring(selfAddr) .. " inited")
     skynet.fork(worker.timer, worker)
 end
 

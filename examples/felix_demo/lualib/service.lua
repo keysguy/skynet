@@ -62,8 +62,10 @@ end
 function M.call(node, srv, ...)
     local mynode = skynet.getenv("node")
     if node == mynode then
+        skynet.error(M.name .. " " .. M.id .. " local call: " .. node .. " - " .. srv)
         return skynet.call(srv, "lua", ...)
     else
+        skynet.error(M.name .. " " .. M.id .. " cluster call: " .. node .. " - " .. srv)
         return cluster.call(node, srv, ...)
     end
 end
@@ -71,8 +73,10 @@ end
 function M.send(node, srv, ...)
     local mynode = skynet.getenv("node")
     if node == mynode then
+        skynet.error(M.name .. " " .. M.id .. " local send: " .. node .. " - " .. srv)
         return skynet.send(srv, "lua", ...)
     else
+        skynet.error(M.name .. " " .. M.id .. " cluster send: " .. node .. " - " .. srv)
         return cluster.send(node, srv, ...)
     end
 end
