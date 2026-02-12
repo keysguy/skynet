@@ -11,12 +11,9 @@ buyer.resp.buy = function(source)
     local ok = true
     local result_or_err = 0
 
-    local workerNode = cluster.proxy("node1", "felix_worker")
-    skynet.error("workerNode addr: " .. tostring(workerNode))
+    local workerNode = cluster.proxy("node1", "@felix_worker")
     local curNode = skynet.getenv("node") or "unknown"
-    --ok, result_or_err = pcall(buyer.call, curNode, workerNode, "change_money", -buyer.cat_food_price)
-
-    ok, result_or_err = pcall(buyer.call, "node1", "@felix_worker", "change_money", -buyer.cat_food_price)
+    ok, result_or_err = pcall(buyer.call, curNode, workerNode, "change_money", -buyer.cat_food_price)
 
     if not ok then
         -- skynet.call 调用本身失败（服务不存在、消息发送失败等）
@@ -33,8 +30,7 @@ buyer.resp.buy = function(source)
         end
         -- 购买失败，把钱加回去
         skynet.error("buy failed, money not enough")
-        buyer.call("node1", "@felix_worker", "change_money", buyer.cat_food_price)
-        --buyer.call(curNode, workerNode, "change_money", buyer.cat_food_price)
+        buyer.call(curNode, workerNode, "change_money", buyer.cat_food_price)
         return false
     end
 end
