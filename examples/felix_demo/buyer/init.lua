@@ -30,7 +30,7 @@ buyer.resp.buy = function(source)
         end
         -- 购买失败，把钱加回去
         skynet.error("buy failed, money not enough")
-        buyer.call(curNode, workerNode, "change_money", buyer.cat_food_price)
+        buyer.call("node1", "@felix_worker", "change_money", buyer.cat_food_price)
         return false
     end
 end

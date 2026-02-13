@@ -4,7 +4,6 @@ include "config_felix.path"
 thread = 8
 logger = nil
 logpath = "."
-harbor = 0
 start = "felix_main"
 bootstrap = "snlua bootstrap"	-- The service for bootstrap
 -- snax_interface_g = "snax_g"
@@ -12,3 +11,7 @@ cpath = root.."cservice/?.so"
 -- daemon = "./skynet.pid"
 node = "node2"
 cluster = "./examples/felix_demo/cluster_config.lua"
+
+harbor = 0
+--address = "127.0.0.1:2527"
+--master = "127.0.0.1:2013"

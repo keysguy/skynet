@@ -17,6 +17,8 @@ worker.init = function()
     local selfAddr = skynet.self()
     skynet.error(worker.name .. " - " .. worker.id .. ", addr:" .. tostring(selfAddr) .. " inited")
     skynet.fork(worker.timer, worker)
+
+    skynet.newservice("debug_console", skynet.getenv("debug_console_port") or 8000)
 end
 
 function worker:timer()

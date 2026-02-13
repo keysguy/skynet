@@ -65,6 +65,7 @@ function M.call(node, srv, ...)
         skynet.error(M.name .. " " .. M.id .. " local call: " .. node .. " - " .. srv)
         return skynet.call(srv, "lua", ...)
     else
+        skynet.trace("cluster")
         skynet.error(M.name .. " " .. M.id .. " cluster call: " .. node .. " - " .. srv)
         return cluster.call(node, srv, ...)
     end
