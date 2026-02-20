@@ -61,3 +61,10 @@ skynet.start(function()
 
 	gate = skynet.newservice("gate")
 end)
+
+local dbg = require("emmy_core")
+if dbg then
+	local ret = dbg.tcpListen("127.0.0.1", 39966)
+	print("Emmy Start Listen 39966: " .. tostring(ret))
+	dbg.waitIDE()
+end
