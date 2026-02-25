@@ -7,14 +7,14 @@ Socket Process:
         skynet_socket_poll -> socket_server_poll -> ctrl_cmd -> listen_socket -> return SOCKET_OPEN -> forward_message(SKYNET_SOCKET_TYPE_CONNECT) ->
         skynet_context_push(PTYPE_SOCKET+SKYNET_SOCKET_TYPE_CONNECT) ->
       skynet.wait(listen_context.co) +
-        // gateserver.register_protocol() -> netpack.filter -> TYPE_INIT -> MSG.init
-        // skynet.wakeup(listen_context.co) -> raw_dispatch_message + suspend(coroutine_resume)
+        // gateserver.register_protocol() -> netpack.filter -> TYPE_INIT -> MSG.init ->
+        // skynet.wakeup(listen_context.co) -> raw_dispatch_message + suspend(coroutine_resume) -> 真正唤醒
         // 这里注意, 这个过程总共有三个协程
-        // 1st: server 本身, 也就是注册了cb函数的lua虚拟机
-        // 2nd: 新协程处理新消息: co_create(proto[PTYPE_SOCKET].dispatch) -> wakeup
-        // 3rd: 恢复wait的老协程: server 调用 suspend -> dispatch_wakeup -> suspend(wakeup_queue, coroutine_resume(wakeup_queue))
+        // 1st: gateserver ctx 本身, 也就是注册了cb函数的lua虚拟机
+        // 2nd: 新协程处理底层push的PTYPE_SOCKET消息: co_create(proto[PTYPE_SOCKET].dispatch) -> MSG.init -> wakeup
+        // 3rd: 从wait被wakeup的老协程(最初被调用的协程): 第二个协程调用 suspend -> dispatch_wakeup -> suspend(wakeup_queue, coroutine_resume(wakeup_queue))
       socketdriver.start()
-        // 和listen流程基本一致, 但listen_context.co在listen触发的消息中被nil, 所以这次只空转一次
+        // 和listen流程基本一致, 但listen_context.co在listen触发的消息中被nil, 所以这次只走到MSG.init就直接返回, 空转一次
         // socketdriver.start → socket_server_start → resume_socket（从 PLISTEN 切到 LISTEN）也会返回一次 SOCKET_OPEN
 
 3. Client -> Socket
