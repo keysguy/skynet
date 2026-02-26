@@ -172,6 +172,26 @@ public interface INetServcice
 
 ### 完整的登录连接流程
 
+Connect:
+	LoginMediator.StartConnectServer -> NetProxy.Connection
+		->
+		(SprotoSocketAp)netClient = SprotoSocketAp.CreateInstance -> NetServcice.CreateClient(PluginManager.NetServcice负责整个网络层驱动, 管理多个 NetClient, NetClient 回调 SprotoSocketAp + NetProxy 的注册函数)
+		(SprotoSocketAp)netClient.setLoginInfo
+			-> (NetClient)NetClient.Connect -> NetworkManager.Connect -> NetworkNoneState.Connect -> TCPConnector.OnConnect
+			-> TCPSession.OnConnectCompleted(mSocket) // 建立TcpSession和Socket的引用
+			   + NetworkManager.OnConnnectComplete -> new ClientSession(TCPSession, NetworkSyncQueue, SprotoSocketAp.protocolResolver) // 建立NetClient.NetworkManager<->ClientSession<->TCPSession 的引用
+  			   + tcpSession.OnConnect + tcpSession.ReceiveRequest(链接成功, 直接接收第一个服务器的challenge包)
+			   
+Receive:
+	TCPSession.ReceiveRequest -> TCPSession.OnReceive -> ClientSession.OnRead -> NetworkManager.mNetworkSyncQueue.PushNetworkStateEvent -> 
+	NetworkManager.mNetworkSyncQueue.PopNetworkStateEvent ->
+		SprotoSocketAp.OnReciveEvent
+		-> ELoginState.EAuth1 / ELoginState.EAuth2 / ELoginState.EAuth3
+			
+			   
+			
+			
+
 ```
 时间 →
 
@@ -287,6 +307,8 @@ public interface INetServcice
     └─ 添加包头和 Session ID
     └─ NetClient.Send() 发出
 ```
+
+
 
 ---
 
