@@ -1,4 +1,6 @@
 Socket Process:
+
+Server Engine:
 1. Main -> watchdog Service -> gate Service
 	skynet.call(skynet.newservice("watchdog"), "lua", "start", { port = 38888,	maxclient = max_client,	nodelay = true ) ->
     watchdog.CMD.start(conf) -> skynet.call(skynet.newservice("gate"), "lua", "open" , conf) -> 
@@ -25,3 +27,5 @@ Socket Process:
       skynet.call(gate, "lua", "forward", fd) -> gateserver.openclient(fd) -> socketdriver.start(fd)
 
   
+Client Engine:
+  NetworkLayerArchitecture.md
