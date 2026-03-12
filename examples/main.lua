@@ -20,3 +20,11 @@ skynet.start(function()
 	skynet.error("Watchdog listen on " .. addr .. ":" .. port)
 	skynet.exit()
 end)
+
+local dbg = require("emmy_core")
+if dbg then
+	local ret = dbg.tcpListen("127.0.0.1", 39966)
+	print("Emmy Start Listen 39966 wait: " .. tostring(ret))
+	dbg.waitIDE()
+	print("Emmy Start Listen 39966 done")
+end
